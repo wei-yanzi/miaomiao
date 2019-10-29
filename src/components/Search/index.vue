@@ -42,9 +42,10 @@
         watch:{
             message(newVal){
                 var that=this;
+                var cityId=this.$store.state.city.id;
                 this.cancelRequest();//取消上一次的方法
                 //要注意多次请求这种情况，（可以结合clearTimeOut和setTimeOut=>这种就叫做函数防抖，在最后一次请求数据）
-                this.$axios.get('/api/searchList?cityId=10&kw='+newVal,{cancelToken: new this.$axios.CancelToken(function(c) {
+                this.$axios.get('/api/searchList?cityId='+cityId+'&kw='+newVal,{cancelToken: new this.$axios.CancelToken(function(c) {
                         that.source = c;
                     })}).then((res)=>{
                     var msg=res.data.msg;
